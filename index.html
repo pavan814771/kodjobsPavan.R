@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KodJobs - Where Talent Meets Opportunity</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React Scripts -->
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        .tech-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+                url('https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            min-height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tech-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                rgba(0, 255, 170, 0.3),
+                rgba(76, 161, 255, 0.3),
+                rgba(111, 66, 193, 0.3),
+                rgba(255, 45, 125, 0.3)
+            );
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            z-index: 1;
+        }
+        
+        .tech-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 15%, rgba(0, 255, 170, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 85% 85%, rgba(255, 45, 125, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 85% 15%, rgba(76, 161, 255, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 15% 85%, rgba(111, 66, 193, 0.4) 0%, transparent 25%);
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .tech-background > div {
+            position: relative;
+            z-index: 2;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateZ(0);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-effect::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shimmer 6s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #2dd81e, #12d490, #14cabb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
+            position: relative;
+        }
+
+        .gradient-text::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at center, rgba(96, 239, 255, 0.2), transparent 70%);
+            filter: blur(20px);
+            z-index: -1;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .login-background {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            animation: gradientMove 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(173, 216, 230, 0.3) 0%, transparent 50%);
+            animation: pulseGlow 8s ease-in-out infinite alternate;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #1dd1a1, #48dbfb, #ff9ff3);
+            background-size: 300% 100%;
+            animation: gradientSlide 5s linear infinite;
+        }
+        
+        @keyframes gradientSlide {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .login-slide {
+            position: fixed;
+            right: -40%;
+            top: 0;
+            width: 40%;
+            height: 100vh;
+            background: linear-gradient(135deg, #4158D0, #C850C0, #FFCC70);
+            background-size: 300% 300%;
+            animation: gradientMove 15s ease infinite;
+            transition: right 0.5s ease;
+            z-index: 999;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .login-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(201, 37, 210, 0.3) 50%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(65, 19, 194, 0.2) 50%, transparent 50%);
+            animation: pulseGlow 8s ease-in-out infinite alternate;
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(108, 92, 231, 0.2);
+            border-radius: 12px;
+            padding: 10px 15px !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 0;
+        }
+        
+        .input-field:focus {
+            background: #ffffff;
+            border-color: #6c5ce7;
+            box-shadow: 0 0 15px rgba(108, 92, 231, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        button[type="submit"] {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe) !important;
+            border-radius: 12px !important;
+            padding: 12px !important;
+            font-weight: bold !important;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background: linear-gradient(45deg, #5649c0, #8f87e0) !important;
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.6);
+            transform: translateY(-3px) !important;
+        }
+        
+        .form-header h2 {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .form-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-footer button {
+            color: #6c5ce7;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .form-footer button:hover {
+            color: #5649c0;
+            text-decoration: underline;
+        }
+        
+        .form-divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .form-divider::before,
+        .form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(108, 92, 231, 0.5), transparent);
+        }
+        
+        .form-divider span {
+            padding: 0 1rem;
+            color: #6c5ce7;
+            font-weight: 500;
+        }
+        
+        .robot-button {
+            background: linear-gradient(45deg, #4158D0, #C850C0) !important;
+            box-shadow: 0 5px 15px rgba(200, 80, 192, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .robot-button:hover {
+            background: linear-gradient(45deg, #3a4ec0, #b745b0) !important;
+            box-shadow: 0 8px 25px rgba(200, 80, 192, 0.7);
+        }
+
+        /* Success and error messages */
+        .success-message {
+            background: linear-gradient(45deg, rgba(29, 209, 161, 0.2), rgba(72, 219, 251, 0.2));
+            border-left: 4px solid #1dd1a1;
+            color: #10ac84;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .error-message {
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.2), rgba(254, 202, 87, 0.2));
+            border-left: 4px solid #ff6b6b;
+            color: #ee5253;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .robot-button {
+            position: fixed;
+            right: 40px;
+            top: 20px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .robot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .robot-icon {
+            font-size: 24px;
+        }
+
+        .robot-label {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-slide {
+            position: fixed;
+            right: -40%;
+            top: 0;
+            width: 40%;
+            height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            transition: right 0.5s ease;
+            z-index: 999;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-slide.active {
+            right: 0;
+        }
+
+        .main-content {
+            transition: all 0.5s ease;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content.shrink {
+            width: 60%;
+            border-right: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #444;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1010;
+        }
+
+        .close-button:hover {
+            color: #000;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes robotWave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-20deg); }
+            75% { transform: rotate(20deg); }
+        }
+
+        .robot-button:hover .robot-icon {
+            animation: robotWave 1s ease infinite;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        #root {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .split-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content.shrink {
+                width: 100%;
+                filter: blur(5px);
+            }
+
+            .login-slide {
+                width: 100%;
+                right: -100%;
+            }
+
+            .login-slide.active {
+                right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .robot-button {
+                padding: 10px 20px;
+                right: 20px;
+                top: 15px;
+            }
+            
+            .robot-icon {
+                font-size: 20px;
+            }
+            
+            .robot-label {
+                font-size: 12px;
+            }
+        }
+
+        .feature-card {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .feature-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            z-index: 2;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+        }
+
+        .compact-form .space-y-5 > div {
+            margin-bottom: 12px;
+        }
+        
+        .compact-form label {
+            margin-bottom: 2px;
+            display: inline-block;
+        }
+        
+        .compact-form .form-header {
+            margin-bottom: 1rem;
+        }
+        
+        .compact-form .form-header h2 {
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .age-warning {
+            color: #ff6b6b;
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // User storage in localStorage
+        const getUsers = () => {
+            const users = localStorage.getItem('users');
+            return users ? JSON.parse(users) : [];
+        };
+
+        const saveUser = (user) => {
+            const users = getUsers();
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+        };
+
+        function App() {
+            const [isLogin, setIsLogin] = React.useState(true);
+            const [showLogin, setShowLogin] = React.useState(false);
+            const [formData, setFormData] = React.useState({
+                username: '',
+                email: '',
+                password: '',
+                dob: ''
+            });
+            const [calculatedAge, setCalculatedAge] = React.useState('');
+            const [error, setError] = React.useState('');
+            const [success, setSuccess] = React.useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                setError('');
+                setSuccess('');
+
+                if (isLogin) {
+                    // Handle Login
+                    const users = getUsers();
+                    const user = users.find(u => 
+                        u.username === formData.username && 
+                        u.password === formData.password
+                    );
+
+                    if (user) {
+                        setSuccess('Login successful!');
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                        // Update the redirect path to match your file structure
+                        window.location.href = './dashboard.html';
+                    } else {
+                        setError('Invalid username or password');
+                    }
+                } else {
+                    // Handle Signup
+                    const users = getUsers();
+                    
+                    // Check if username already exists
+                    if (users.some(u => u.username === formData.username)) {
+                        setError('Username already exists');
+                        return;
+                    }
+
+                    // Check if email already exists
+                    if (users.some(u => u.email === formData.email)) {
+                        setError('Email already registered');
+                        return;
+                    }
+
+                    // Calculate age
+                    const age = calculateAge(formData.dob);
+                    if (age < 18) {
+                        setError('You must be 18 or older to register');
+                        return;
+                    }
+
+                    // Save new user
+                    saveUser({
+                        ...formData,
+                        id: Date.now(),
+                        createdAt: new Date().toISOString()
+                    });
+
+                    setSuccess('Account created successfully! Please login.');
+                    // Clear form and switch to login
+                    setTimeout(() => {
+                        setFormData({
+                            username: '',
+                            email: '',
+                            password: '',
+                            dob: ''
+                        });
+                        setIsLogin(true);
+                    }, 2000);
+                }
+            };
+
+            const calculateAge = (dob) => {
+                const today = new Date();
+                const birthDate = new Date(dob);
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return age;
+            };
+
+            const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                
+                setFormData({
+                    ...formData,
+                    [name]: value
+                });
+                
+                // Calculate age when date of birth changes
+                if (name === 'dob' && value) {
+                    const age = calculateAge(value);
+                    setCalculatedAge(age);
+                }
+            };
+
+            return (
+                <>
+                    <div className="split-container">
+                        <div className={`main-content tech-background ${showLogin ? 'shrink' : ''}`}>
+                            <div className="text-white text-center max-w-6xl mx-auto px-4">
+                                <div className="mb-8 animate-float">
+                                    <h1 className="text-6xl font-bold mb-4 gradient-text">
+                                        WELCOME TO KODJOBS
+                                    </h1>
+                                    <p className="text-3xl text-white font-light tracking-wide mb-12">
+                                        Where Talent Meets Opportunity
+                                    </p>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                                    <div className="feature-card shadow-lg">
+                                        <img 
+                                            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                                            alt="Find Your Dream Job"
+                                        />
+                                        <div className="feature-content">
+                                            <span className="feature-icon">🎯</span>
+                                            <h3 className="text-xl font-semibold text-white">Find Your Dream Job</h3>
+                                        </div>
+                                    </div>
+                                    <div className="feature-card shadow-lg">
+                                        <img 
+                                            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                                            alt="Grow Your Career"
+                                        />
+                                        <div className="feature-content">
+                                            <span className="feature-icon">🚀</span>
+                                            <h3 className="text-xl font-semibold text-white">Grow Your Career</h3>
+                                        </div>
+                                    </div>
+                                    <div className="feature-card shadow-lg">
+                                        <img 
+                                            src="https://images.unsplash.com/photo-1560439514-4e9645039924?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                                            alt="Connect with Employers"
+                                        />
+                                        <div className="feature-content">
+                                            <span className="feature-icon">🤝</span>
+                                            <h3 className="text-xl font-semibold text-white">Connect with Employers</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sliding Login Panel */}
+                        <div className={`login-slide ${showLogin ? 'active' : ''}`}>
+                            <button 
+                                className="close-button"
+                                onClick={() => setShowLogin(false)}
+                            >
+                                ×
+                            </button>
+                            <div className="h-full flex items-center justify-center p-4">
+                                <div className="w-full">
+                                    {error && (
+                                        <div className="error-message py-2 px-4 mb-3">
+                                            {error}
+                                        </div>
+                                    )}
+                                    {success && (
+                                        <div className="success-message py-2 px-4 mb-3">
+                                            {success}
+                                        </div>
+                                    )}
+                                    <div className="form-container p-6 relative z-10 compact-form">
+                                        <div className="form-header">
+                                            <h2 className="text-2xl font-bold text-center">
+                                                {isLogin ? 'Welcome Back!' : 'Create Account'}
+                                            </h2>
+                                        </div>
+                                        <form onSubmit={handleSubmit} className="space-y-3">
+                                            <div>
+                                                <input
+                                                    type="text"
+                                                    name="username"
+                                                    placeholder="Username"
+                                                    value={formData.username}
+                                                    onChange={handleInputChange}
+                                                    className="input-field w-full text-gray-800"
+                                                    required
+                                                />
+                                            </div>
+                                            {!isLogin && (
+                                                <div>
+                                                    <input
+                                                        type="email"
+                                                        name="email"
+                                                        placeholder="Email Address"
+                                                        value={formData.email}
+                                                        onChange={handleInputChange}
+                                                        className="input-field w-full text-gray-800"
+                                                        required
+                                                    />
+                                                </div>
+                                            )}
+                                            <div>
+                                                <input
+                                                    type="password"
+                                                    name="password"
+                                                    placeholder="Password"
+                                                    value={formData.password}
+                                                    onChange={handleInputChange}
+                                                    className="input-field w-full text-gray-800"
+                                                    required
+                                                />
+                                            </div>
+                                            {!isLogin && (
+                                                <>
+                                                    <div className="grid grid-cols-2 gap-3">
+                                                        <div>
+                                                            <label className="block text-gray-600 text-xs mb-1">Date of Birth</label>
+                                                            <input
+                                                                type="date"
+                                                                name="dob"
+                                                                value={formData.dob}
+                                                                onChange={handleInputChange}
+                                                                className="input-field w-full text-gray-800"
+                                                                required
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-gray-600 text-xs mb-1">Age</label>
+                                                            <input
+                                                                type="text"
+                                                                value={calculatedAge ? `${calculatedAge} years` : ''}
+                                                                className="input-field w-full text-gray-800 bg-gray-100"
+                                                                readOnly
+                                                                placeholder="AGE"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    {calculatedAge && calculatedAge < 18 && (
+                                                        <div className="age-warning">
+                                                            You must be at least 18 years old to register.
+                                                        </div>
+                                                    )}
+                                                </>
+                                            )}
+                                            <button
+                                                type="submit"
+                                                className="w-full text-white py-2 rounded-lg mt-2"
+                                                disabled={!isLogin && calculatedAge < 18}
+                                            >
+                                                {isLogin ? 'Login' : 'Sign Up'}
+                                            </button>
+                                        </form>
+                                        <div className="form-footer mt-3">
+                                            <p className="text-gray-600 text-sm">
+                                                {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
+                                                <button
+                                                    onClick={() => {
+                                                        setIsLogin(!isLogin);
+                                                        setError('');
+                                                        setSuccess('');
+                                                        setCalculatedAge('');
+                                                        setFormData({
+                                                            username: '',
+                                                            email: '',
+                                                            password: '',
+                                                            dob: ''
+                                                        });
+                                                    }}
+                                                >
+                                                    {isLogin ? 'Sign Up' : 'Login'}
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Robot Button */}
+                    <div 
+                        className="robot-button"
+                        onClick={() => setShowLogin(true)}
+                        title="Click to login"
+                    >
+                        <span className="robot-icon">🤖</span>
+                        <span className="robot-label">Login</span>
+                    </div>
+                </>
+            );
+        }
+
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+    </script>
+</body>
+</html>
